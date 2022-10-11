@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
@@ -26,8 +27,8 @@
     <h1 style="font-size: 40px; padding: 10px">Электронные книги</h1>
 </div>
 <div style="width: 250px; height: 400px; background-color: lightgrey; padding: 12px;">
-    <c:forEach var="ebookList" items="${ebookList}">
-        <p><c:out value="${ebookList}" /></p>
+    <c:forEach var="phone" items="${smartphones}">
+        <p><c:out value="${phone}" /></p>
     </c:forEach>
 </div>
 

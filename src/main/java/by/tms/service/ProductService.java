@@ -15,6 +15,10 @@ public class ProductService {
     @Qualifier("inMemoryProductStorage")
     private Storage<AbstractProduct, Long> productStorage;
 
+    public ProductService() {
+        fillProductListToTest();
+    }
+
     public AbstractProduct saveProduct(AbstractProduct product) {
         productStorage.save(product);
         return product;
@@ -26,8 +30,8 @@ public class ProductService {
     public Optional<AbstractProduct> findProductById(Long id) {
         return productStorage.findById(id);
     }
+
     public List<AbstractProduct> getProductListForStoreOffer(String productCategory) {
-        fillProductListToTest();
         List<AbstractProduct> productList = null;
         switch (productCategory) {
             case ("Smartphone"):
@@ -65,7 +69,7 @@ public class ProductService {
         saveProduct(new Smartwatch("777", "SWatch1", "Huawei", "2022", "777size", "black", "Android", "777", "leather"));
     }
 
-    private List<AbstractProduct> getSmartphoneList() {
+    public List<AbstractProduct> getSmartphoneList() {
         return productStorage.getListOfEntity().stream().filter(product ->
                 product instanceof Smartphone).toList();
     }

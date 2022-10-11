@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +28,16 @@ import java.util.Optional;
 public class MainController {
     private final StoreService storeService;
     private final CustomerService customerService;
+    private final ProductService productService;
 
     @Autowired
     @Qualifier("inMemoryProductStorage")
     private Storage<AbstractProduct, Long> productStorage;
 
-    public MainController(StoreService storeService, CustomerService customerService) {
+    public MainController(StoreService storeService, CustomerService customerService, ProductService productService) {
         this.storeService = storeService;
         this.customerService = customerService;
+        this.productService = productService;
     }
 
     @GetMapping("/login")
@@ -74,29 +75,31 @@ public class MainController {
         }
     }
 
-        @GetMapping("/mobile")
-        public String mobile(){
-            return "mobileCatalog";
-        }
+    @GetMapping("/mobile")
+    public String mobile(Model model) {
+        model.addAttribute("smartphones", productService.getSmartphoneList());
+        return "mobileCatalog";
+    }
 
-        @GetMapping("/tabletpc")
-        public String tabletPC(){
-            return "tabletpcCatalog";
-        }
+    @GetMapping("/tabletpc")
+    public String tabletPC() {
+        return "tabletpcCatalog";
+    }
 
-        @GetMapping("/ebook")
-        public String ebook(){
-;            return "ebookCatalog";
-        }
+    @GetMapping("/ebook")
+    public String ebook() {
+        ;
+        return "ebookCatalog";
+    }
 
-        @GetMapping("/smartwatch")
-        public String smartwatch(){
-            return "smartwatchCatalog";
-        }
+    @GetMapping("/smartwatch")
+    public String smartwatch() {
+        return "smartwatchCatalog";
+    }
 
-        @GetMapping("/notebook")
-        public String notebook(){
-            return "notebookCatalog";
-        }
+    @GetMapping("/notebook")
+    public String notebook() {
+        return "notebookCatalog";
+    }
 
 }
